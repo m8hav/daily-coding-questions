@@ -76,6 +76,7 @@ class Solution {
             dp[i] = -1;
 
         // return solveRec(nums, 0);    // Gives TLE
-        return solveMem(nums, 0, dp);
+        // return solveMem(nums, 0, dp);
+        return solveTabSpaceOp(nums);
     }
 }
