@@ -5,10 +5,10 @@ class Solution {
 
             - traverse full board
             - create signature strings for existing values
-                for their row, column, and 3x3 block. Examples:
-                 - 0th row, value 3: 0(3)
-                 - 0th column, value 3: (3)0
-                 - top-right block, value 3: 0(3)2
+                for their row, column, and 3x3 box. Examples:
+                 - 0th row, value 3: 3@row0
+                 - 0th column, value 3: 3@col0
+                 - top-right box, value 3: 3@box02
             - add these strings to a set for each existing value.
             - if value already exists, return false.
 
@@ -19,10 +19,9 @@ class Solution {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] == '.') continue;
-                String signMid = "(" + board[i][j] + ")";
-                if (!signs.add(i + signMid)
-                    || !signs.add(signMid + j)
-                    || !signs.add(i / 3 + signMid + j / 3))
+                if (!signs.add(board[i][j] + "@row" + i)
+                    || !signs.add(board[i][j] + "@col" + j)
+                    || !signs.add(board[i][j] + "@box" + i/3 + j/3))
                     return false;
             }
         }
