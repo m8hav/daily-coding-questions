@@ -1,6 +1,6 @@
 class Solution {
     public int removeDuplicates(int[] nums) {
-        // brute force solution
+        // brute force solution - O(n log(n))
         int count = 1;
         int last = nums[0];
         int k = 1;
