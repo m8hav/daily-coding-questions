@@ -1,25 +1,32 @@
 class Solution {
     public boolean isValidSudoku(char[][] board) {
         /*
-            BRUTE FORCE APPROACH
+            POSITION SIGNATURE METHOD
 
-            Checking each row, each column, and each 3x3 box for each filled cell.
+            - traverse full board
+            - create signature strings for existing values
+                for their row, column, and 3x3 block. Examples:
+                 - 0th row, value 3: 0(3)
+                 - 0th column, value 3: (3)0
+                 - top-right block, value 3: 0(3)2
+            - add these strings to a set for each existing value.
+            - if value already exists, return false.
+
         */
+
+        Set<String> signs = new HashSet<>();
+        
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] == '.') continue;
-                
-                for (int k = i + 1; k < 9; k++)
-                    if (board[k][j] == board[i][j]) return false;
-                for (int k = j + 1; k < 9; k++)
-                    if (board[i][k] == board[i][j]) return false;
-                int boxStartRow = (i / 3) * 3;
-                int boxStartColumn = (j / 3) * 3;
-                for (int k = boxStartRow; k < boxStartRow + 3; k++)
-                    for (int l = boxStartColumn; l < boxStartColumn + 3; l++)
-                        if (k != i && l != j && board[k][l] == board[i][j]) return false;
+                String signMid = "(" + board[i][j] + ")";
+                if (!signs.add(i + signMid)
+                    || !signs.add(signMid + j)
+                    || !signs.add(i / 3 + signMid + j / 3))
+                    return false;
             }
         }
+        
         return true;
     }
 }
