@@ -1,17 +1,19 @@
 class Solution {
     public String addBinary(String a, String b) {
-        String ans = "";
+        StringBuilder sb = new StringBuilder();
         int i = 0;
         int sum = 0;
         while (i < a.length() || i < b.length() || sum > 0) {
             if (a.length() - i - 1 >= 0)
-                sum += a.charAt(a.length() - i - 1) == '1' ? 1 : 0;
+                if (a.charAt(a.length() - i - 1) == '1')
+                    sum++;
             if (b.length() - i - 1 >= 0)
-                sum += b.charAt(b.length() - i - 1) == '1' ? 1 : 0;
-            ans = (sum % 2) + ans;
+                if (b.charAt(b.length() - i - 1) == '1')
+                    sum++;
+            sb.append(sum % 2);
             sum /= 2;
             i++;
         }
-        return ans;
+        return sb.reverse().toString();
     }
 }
