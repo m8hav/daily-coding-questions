@@ -16,24 +16,30 @@ class Solution {
     add a copy of the array to the answer nested array.
      */
 
-    private void swap(List<Integer> arr, int a, int b) {
-        int temp = arr.get(a);
-        arr.set(a, arr.get(b));
-        arr.set(b, temp);
+    private void swap(int[] arr, int a, int b) {
+        int temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
     }
 
-    private void solve(List<Integer> nums, List<List<Integer>> ans, int idx) {
-        if (idx == nums.size()) {
+    private List<Integer> toList(int[] arr) {
+        List<Integer> ans = new ArrayList<>();
+        for (int e : arr) ans.add(e);
+        return ans;
+    }
+
+    private void solve(int[] nums, List<List<Integer>> ans, int idx) {
+        if (idx == nums.length) {
             // add a copy of current state of nums
             // if end of array reached for current permutation
-            ans.add(new ArrayList<>(nums));
+            ans.add(toList(nums));
             return;
         }
 
         // make recursive call by leaving current arrangement for default position
         solve(nums, ans, idx + 1);
         // make recursive calls by swapping elements with each remaining position
-        for (int i = idx + 1; i < nums.size(); i++) {
+        for (int i = idx + 1; i < nums.length; i++) {
             swap(nums, i, idx);
             solve(nums, ans, idx + 1);
             swap(nums, i, idx);
@@ -43,10 +49,7 @@ class Solution {
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
 
-        List<Integer> input = new ArrayList<>();
-        for (int num : nums) input.add(num);
-
-        solve(input, ans, 0);
+        solve(nums, ans, 0);
 
         return ans;
     }
