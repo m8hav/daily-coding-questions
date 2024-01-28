@@ -26,9 +26,11 @@ class Solution {
 
     private int solveAlgo(int[] nums) {
         /*
-        Modified solution from Solutions tab - Super Optimised
+        Modified solution from Solutions tab
+        Slightly Modified Boyer-Moore Majority Voting Algorithm
             Time: O(n), n - length of nums
             Space: O(1)
+        Source: https://www.cs.utexas.edu/~moore/best-ideas/mjrty/
 
         Intuition:
             Array length is always odd for there to be majority element.
