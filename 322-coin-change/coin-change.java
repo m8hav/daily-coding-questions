@@ -5,10 +5,11 @@ class Solution {
             dp[i] = Integer.MAX_VALUE;
         dp[0] = 0;
 
-        for (int i = 1; i <= amount; i++) {
-            for (int j = coins.length - 1; j >= 0; j--) {
-                if (i - coins[j] < 0 || dp[i - coins[j]] == Integer.MAX_VALUE) continue;
-                dp[i] = Math.min(dp[i], 1 + dp[i - coins[j]]);
+        for (int coin : coins) {
+            for (int value = 1; value <= amount; value++) {
+                if (value - coin < 0 || dp[value - coin] == Integer.MAX_VALUE)
+                    continue;
+                dp[value] = Math.min(dp[value], 1 + dp[value - coin]);
             }
         }
 
