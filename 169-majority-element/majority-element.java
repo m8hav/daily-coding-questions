@@ -1,5 +1,30 @@
 class Solution {
-    public int majorityElement(int[] nums) {
+
+    private int solveMap(int[] nums) {
+        /**
+        
+        Simple Intuition - Use Map to store occurrence of each element
+        Time: O(n), n - length of nums
+        Space: O(n), n - length of nums
+        
+        */
+
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            if (map.containsKey(num)) map.put(num, map.get(num) + 1);
+            else map.put(num, 1);
+        }
+        int major = 0, count = 0;
+        for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+            if (e.getValue() > count) {
+                major = e.getKey();
+                count = e.getValue();
+            }
+        }
+        return major;
+    }
+
+    private int solveAlgo(int[] nums) {
         /*
         Modified solution from Solutions tab - Super Optimised
             Time: O(n), n - length of nums
@@ -41,7 +66,7 @@ class Solution {
             - [1, 2, 2, 1, 2]
             - [1, 2, 1, 2, 2]
         */
-        
+
         int major = nums[0];
         int count = 1;
         for (int i = 1; i < nums.length; i++) {
@@ -53,5 +78,10 @@ class Solution {
             }
         }
         return major;
+    }
+
+    public int majorityElement(int[] nums) {
+        // return solveMap(nums);
+        return solveAlgo(nums);
     }
 }
