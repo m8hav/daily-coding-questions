@@ -5,8 +5,8 @@ class Solution {
             dp[value] = Integer.MAX_VALUE;
         dp[0] = 0;
 
-        for (int value = 1; value <= amount; value++) {
-            for (int coin : coins) {
+        for (int coin : coins) {
+            for (int value = 1; value <= amount; value++) {
                 if (value - coin < 0 || dp[value - coin] == Integer.MAX_VALUE)
                     continue;
                 dp[value] = Math.min(dp[value], 1 + dp[value - coin]);
