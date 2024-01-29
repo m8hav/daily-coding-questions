@@ -19,6 +19,8 @@ class Solution {
         /**
             Relatively better than DFS
             stops as soon as it finds leaf node on any level
+
+            somehow worse results than DFS in submission results though
          */
         
         if (root == null) return 0;
@@ -57,6 +59,8 @@ class Solution {
             Not optimal
             as left node might have 500 depth below and right only 1
             but it will still traverse full left subtree before checking right
+
+            somehow better results than BFS in submission results though
          */
         if (root == null) return 0;
         int[] currentMin = new int[]{Integer.MAX_VALUE};
